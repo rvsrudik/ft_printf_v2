@@ -79,7 +79,7 @@ char		*ft_itoa_j(void *nbr)
 		free(beginnbr);
 		beginnbr = ft_strnew(20);
 		ft_strcpy(beginnbr, "-9223372036854775808");
-		return ("-9223372036854775808");
+		return (beginnbr);
 	}
 	return (beginnbr);
 }

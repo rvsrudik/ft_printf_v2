@@ -36,9 +36,8 @@ static char	*ft_big_str_to_str(void *s)
 	str = ft_strnew(i);
 	while (k < i)
 	{
-		str[k] = *((char*)tmp);
+		str[k++] = *((char*)tmp);
 		tmp++;
-		k++;
 	}
 	return (str);
 }

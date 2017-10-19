@@ -63,10 +63,8 @@ void		ft_width(t_printf *params)
 		str = ft_strjoin(params->str, tmp);
 	else
 		str = ft_strjoin(tmp, params->str);
-	if (tmp)
-		free(tmp);
-	if (params->str)
-		free(params->str);
+	(tmp) ? free(tmp) : 0;
+	(params->str) ? free(params->str) : 0;
 	params->str = str;
 	if (params->flag_zero)
 		ft_with_zero_flag(params, tmp, diflen);

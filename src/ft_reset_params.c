@@ -26,4 +26,5 @@ void	ft_reset_params(t_printf *params)
 	params->precision = -1;
 	params->str = NULL;
 	params->flags = NULL;
+	params->str_memory_allocated = 0;
 }

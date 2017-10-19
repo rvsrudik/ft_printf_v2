@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-void	ft_precision_for_x(t_printf *params)
+void		ft_precision_for_x(t_printf *params)
 {
 	char	*tmp;
 	size_t	diff;
@@ -32,4 +32,39 @@ void	ft_precision_for_x(t_printf *params)
 			params->str = tmp;
 		}
 	}
+}
+
+char		*ft_prec_norm_one(char *tmp, char *param_str, char *begin_str)
+{
+	char	*tmp3;
+
+	tmp3 = ft_strjoin(tmp, param_str);
+	free(tmp);
+	free(begin_str);
+	return (tmp3);
+}
+
+void		ft_prec_norm_two(t_printf *params, int *flag)
+{
+	params->str++;
+	*flag = 1;
+}
+
+void		ft_prec_norm_three(t_printf *params)
+{
+	free(params->str);
+	params->str = ft_strnew(0);
+}
+
+int			flag_anal_norm_one(void **begin_argumenst,
+			char *begin_tmp, t_printf *params)
+{
+	int to_print;
+
+	to_print = ft_strlen(g_toprint);
+	free(begin_argumenst);
+	free(begin_tmp);
+	free(params);
+	free(g_toprint);
+	return (to_print);
 }

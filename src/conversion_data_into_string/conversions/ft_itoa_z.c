@@ -30,8 +30,6 @@ static char	*ft_determ_size(void *nbr, size_t *number, size_t *digs)
 		(*digs)++;
 	}
 	tmp = ft_strnew_bchar(flag + *digs, '+');
-	if (flag)
-		tmp[0] = '-';
 	return (tmp);
 }
 
@@ -68,6 +66,13 @@ char		*ft_itoa_z(void *nbr)
 	check = *((intmax_t *)(nbr));
 	charnbr = ft_determ_size(nbr, &number, &digs);
 	beginnbr = charnbr;
+	if (number == -1)
+	{
+		free(beginnbr);
+		beginnbr = ft_strnew(2);
+		ft_strcpy(beginnbr, "-1");
+		return (beginnbr);
+	}
 	if (charnbr[0] == '-')
 		charnbr++;
 	ft_convert_num(charnbr, digs, number);

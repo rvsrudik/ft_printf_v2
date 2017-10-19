@@ -53,6 +53,5 @@ int			ft_printf(char *format, ...)
 	}
 	va_end(ap);
 	syb = ft_flag_analysis(format, arguments);
-
 	return (syb);
 }

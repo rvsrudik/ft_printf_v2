@@ -17,9 +17,15 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-//# define TYPES "d"
-
 # define TYPES "sSpdDioOuUxXcC%"
+
+# define RED     p"\x1b[31m"
+# define GREEN   "\x1b[32m"
+# define YELLOW  "\x1b[33m"
+# define BLUE    "\x1b[34m"
+# define MAGENTA "\x1b[35m"
+# define CYAN    "\x1b[36m"
+# define RESET   "\x1b[0m"
 
 int					g_flag;
 char				*g_toprint;
@@ -39,7 +45,7 @@ typedef struct		s_printf
 	int				precision;
 	char			*str;
 	char			*flags;
-	int 			str_memory_allocated;
+	int				str_memory_allocated;
 }					t_printf;
 
 /*
@@ -78,8 +84,6 @@ char				*ft_itoa_base_ll(void *nbr, int base);
 char				*ft_itoa_base_j(void *nbr, int base);
 char				*ft_itoa_base_z(void *nbr, int base);
 
-//char				*ft_itoa_big_base(void *nbr, int base);
-
 char				*ft_itoa_base_big(void *nbr, int base);
 char				*ft_itoa_base_big_h(void *nbr, int base);
 char				*ft_itoa_base_big_hh(void *nbr, int base);
@@ -104,6 +108,13 @@ void				ft_convert_c(t_printf *params);
 void				ft_convert_percent(t_printf *params);
 void				ft_convert_p(t_printf *params);
 void				ft_convert_s(t_printf *params);
+
+char				*ft_prec_norm_one(char *tmp, char *param_str,
+					char *begin_str);
+void				ft_prec_norm_two(t_printf *params, int *flag);
+void				ft_prec_norm_three(t_printf *params);
+int					flag_anal_norm_one(void **begin_argumenst,
+					char *begin_tmp, t_printf *params);
 /*
  **---------------------------------------------------------------------
  **------------------------------>FLAGS<--------------------------------

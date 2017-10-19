@@ -53,37 +53,24 @@ static void	ft_precision_for_diu(t_printf *params)
 	char	*tmp2;
 	char	*begin_str;
 
-	if (params->precision >= 0)
-		params->flag_zero = 0;
+	(params->precision >= 0) ? params->flag_zero = 0 : 0;
 	flag = 0;
-
 	if (!ft_strcmp(params->str, "0") && !params->precision)
-	{
-		free(params->str);
-		params->str = ft_strnew(0);
-	}
+		ft_prec_norm_three(params);
 	else
 	{
 		begin_str = params->str;
 		if (params->str[0] == '-')
-		{
-			params->str++;
-			flag = 1;
-		}
+			ft_prec_norm_two(params, &flag);
 		if ((int)(ft_strlen(params->str)) < params->precision)
 		{
 			diff = params->precision - ft_strlen(params->str);
 			tmp = ft_strnew_bchar(diff, '0');
-			tmp2 = ft_strjoin(tmp, params->str);
-			free(tmp);
-				free(begin_str);
+			tmp2 = ft_prec_norm_one(tmp, params->str, begin_str);
 			params->str = tmp2;
 		}
-		if (flag)
-			params->str = ft_strjoin("-", params->str);
+		(flag) ? params->str = ft_strjoin("-", params->str) : 0;
 	}
-
-
 }
 
 static void	ft_precision_for_o(t_printf *params)

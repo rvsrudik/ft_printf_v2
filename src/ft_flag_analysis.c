@@ -12,11 +12,10 @@
 
 #include "../includes/libftprintf.h"
 
-static char	*ft_find_percent(char *line)
+static char	*ft_find_percent(char *line, int i)
 {
 	char	*tmp;
 	char	*tmp2;
-	int		i;
 
 	i = 0;
 	while (line != NULL && line[i] != '\0')
@@ -26,10 +25,8 @@ static char	*ft_find_percent(char *line)
 			tmp = ft_strnew_bchar(i, '?');
 			tmp = ft_strncpy(tmp, line, i);
 			tmp2 = ft_strjoin(g_toprint, tmp);
-			if (tmp)
-				free(tmp);
-			if (g_toprint)
-				free(g_toprint);
+			(tmp) ? free(tmp) : 0;
+			(g_toprint) ? free(g_toprint) : 0;
 			g_toprint = tmp2;
 			line[i] = '\0';
 			ft_putstr(line);
@@ -38,10 +35,8 @@ static char	*ft_find_percent(char *line)
 		i++;
 	}
 	tmp2 = ft_strjoin(g_toprint, line);
-	if (g_toprint)
-		free(g_toprint);
+	(g_toprint) ? free(g_toprint) : 0;
 	ft_putstr(line);
-
 	g_toprint = tmp2;
 	return (0);
 }
@@ -76,8 +71,7 @@ static char	*ft_determ_type(char *line, t_printf *params)
 				params->type = line[i];
 				flags = ft_strnew_bchar(i, '?');
 				params->flags = ft_strncpy(flags, line, i);
-				if (line[i] == '%')
-					g_flag = 1;
+				(line[i] == '%') ? g_flag = 1 : 0;
 				return (&line[i + 1]);
 			}
 			j++;
@@ -93,7 +87,7 @@ int			ft_flag_analysis(char *line, void **arguments)
 	char		*tmp;
 	t_printf	*params;
 	void		**begin_argumenst;
-	char 		*begin_tmp;
+	char		*begin_tmp;
 
 	begin_argumenst = arguments;
 	i = 0;
@@ -107,18 +101,11 @@ int			ft_flag_analysis(char *line, void **arguments)
 	{
 		g_flag = 0;
 		params->data = arguments;
-		tmp = ft_find_percent(tmp);
+		tmp = ft_find_percent(tmp, 0);
 		tmp = ft_determ_type(tmp, params);
-		if (tmp)
-			ft_write_argument(params);
+		(tmp) ? ft_write_argument(params) : 0;
 		arguments++;
 	}
-	g_return_value += ft_strlen(g_toprint);
-
-	// todo вынести в отдельную функцию и проверять на существование
-	free(begin_argumenst);
-	free(begin_tmp);
-	free(params);
-	free(g_toprint);
-	return (g_return_value);
+	return (g_return_value +=
+	flag_anal_norm_one(begin_argumenst, begin_tmp, params));
 }
